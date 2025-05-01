@@ -5,28 +5,29 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
-  Linking,
   Dimensions,
   TouchableWithoutFeedback,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const { width } = Dimensions.get("window");
 const itemWidth = width / 2 - 24; // 2 items per row with margins
 
 const PortfolioItem = ({ item }) => {
   const [isPressed, setIsPressed] = useState(false);
+  const navigation = useNavigation();
 
-  const openLink = (url) => {
-    Linking.openURL(url).catch((err) =>
-      console.error("An error occurred", err)
-    );
+  const handlePress = () => {
+    // Navigate to detail screen with the item data
+    navigation.navigate("PortfolioDetail", { item });
   };
 
   return (
     <TouchableWithoutFeedback
       onPressIn={() => setIsPressed(true)}
       onPressOut={() => setIsPressed(false)}
+      onPress={handlePress}
     >
       <View style={styles.portfolioItem}>
         <Image
@@ -48,57 +49,14 @@ const PortfolioItem = ({ item }) => {
             </View>
           )}
 
-          {item.type === "website" && (
-            <View style={styles.iconsContainer}>
-              <TouchableOpacity
-                style={styles.iconButton}
-                onPress={() => openLink(item.url)}
-              >
-                <Ionicons name="globe" size={24} color="white" />
-              </TouchableOpacity>
-            </View>
-          )}
-
-          {item.type === "app" && (
-            <View style={styles.iconsContainer}>
-              {item.googlePlayUrl && (
-                <TouchableOpacity
-                  style={styles.iconButton}
-                  onPress={() => openLink(item.googlePlayUrl)}
-                >
-                  <Ionicons
-                    name="logo-google-playstore"
-                    size={24}
-                    color="white"
-                  />
-                </TouchableOpacity>
-              )}
-
-              {item.appStoreUrl && (
-                <TouchableOpacity
-                  style={styles.iconButton}
-                  onPress={() => openLink(item.appStoreUrl)}
-                >
-                  <Ionicons
-                    name="logo-apple-appstore"
-                    size={24}
-                    color="white"
-                  />
-                </TouchableOpacity>
-              )}
-            </View>
-          )}
-
-          {item.type === "youtube" && (
-            <View style={styles.iconsContainer}>
-              <TouchableOpacity
-                style={styles.iconButton}
-                onPress={() => openLink(item.youtubeUrl)}
-              >
-                <Ionicons name="logo-youtube" size={24} color="white" />
-              </TouchableOpacity>
-            </View>
-          )}
+          <View style={styles.iconsContainer}>
+            <TouchableOpacity
+              style={styles.viewDetailsButton}
+              onPress={handlePress}
+            >
+              <Text style={styles.viewDetailsText}>View Details</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -141,22 +99,25 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 16,
     textAlign: "center",
+    paddingHorizontal: 8,
   },
   iconsContainer: {
     flexDirection: "row",
     justifyContent: "center",
   },
-  iconButton: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    backgroundColor: "rgba(255, 255, 255, 0.2)",
-    justifyContent: "center",
-    alignItems: "center",
-    marginHorizontal: 6,
+  viewDetailsButton: {
+    backgroundColor: "rgba(39, 174, 96, 0.9)",
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 4,
+  },
+  viewDetailsText: {
+    color: "#fff",
+    fontWeight: "600",
   },
   technologiesList: {
     alignItems: "center",
+    marginBottom: 12,
   },
   technologyItem: {
     color: "#fff",

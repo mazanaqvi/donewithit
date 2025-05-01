@@ -28,8 +28,6 @@ const PortfolioDetailScreen = ({ route, navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" />
-
-      {/* Header with back button */}
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.backButton}
@@ -138,7 +136,7 @@ const PortfolioDetailScreen = ({ route, navigation }) => {
 
               {item.type === "app" && item.googlePlayUrl && (
                 <TouchableOpacity
-                  style={[styles.linkButton, { backgroundColor: "#3bccff" }]}
+                  style={[styles.linkButton, { backgroundColor: "green" }]}
                   onPress={() => openLink(item.googlePlayUrl)}
                 >
                   <Ionicons
@@ -152,7 +150,7 @@ const PortfolioDetailScreen = ({ route, navigation }) => {
 
               {item.type === "app" && item.appStoreUrl && (
                 <TouchableOpacity
-                  style={[styles.linkButton, { backgroundColor: "#007aff" }]}
+                  style={[styles.linkButton, { backgroundColor: "black" }]}
                   onPress={() => openLink(item.appStoreUrl)}
                 >
                   <Ionicons name="logo-apple-appstore" size={20} color="#fff" />
@@ -173,24 +171,6 @@ const PortfolioDetailScreen = ({ route, navigation }) => {
           </View>
 
           {/* Year and Client Info - This would come from your data */}
-          <View style={styles.metaInfoContainer}>
-            <View style={styles.metaInfoItem}>
-              <Text style={styles.metaInfoLabel}>Year</Text>
-              <Text style={styles.metaInfoValue}>{item.year || "2023"}</Text>
-            </View>
-            <View style={styles.metaInfoItem}>
-              <Text style={styles.metaInfoLabel}>Client</Text>
-              <Text style={styles.metaInfoValue}>
-                {item.client || "Various"}
-              </Text>
-            </View>
-            <View style={styles.metaInfoItem}>
-              <Text style={styles.metaInfoLabel}>Role</Text>
-              <Text style={styles.metaInfoValue}>
-                {item.role || "Lead Developer"}
-              </Text>
-            </View>
-          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
