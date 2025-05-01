@@ -8,7 +8,12 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Welcome">
+      <Stack.Navigator
+        initialRouteName="Welcome"
+        options={{
+          headerShown: false, // We're handling the header in the component
+        }}
+      >
         <Stack.Screen
           name="PortfolioDetail"
           component={PortfolioDetailScreen}

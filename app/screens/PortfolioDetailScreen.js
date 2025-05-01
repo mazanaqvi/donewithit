@@ -16,7 +16,6 @@ import { Ionicons } from "@expo/vector-icons";
 const { width } = Dimensions.get("window");
 
 const PortfolioDetailScreen = ({ route, navigation }) => {
-  // Get the item from navigation params
   const { item } = route.params;
 
   const openLink = (url) => {
@@ -40,7 +39,6 @@ const PortfolioDetailScreen = ({ route, navigation }) => {
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* Hero Image */}
         <View style={styles.heroImageContainer}>
           <Image
             source={item.image}
@@ -48,18 +46,13 @@ const PortfolioDetailScreen = ({ route, navigation }) => {
             resizeMode="cover"
           />
         </View>
-
-        {/* Project Details */}
         <View style={styles.detailsContainer}>
           <Text style={styles.projectTitle}>{item.title}</Text>
 
-          {/* Description - This would come from your data */}
           <Text style={styles.description}>
             {item.description ||
               "This project showcases my skills in developing high-quality applications. It demonstrates my ability to create intuitive user interfaces, implement complex functionality, and deliver exceptional user experiences."}
           </Text>
-
-          {/* Technologies Used */}
           {item.technologies && (
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>Technologies Used</Text>
@@ -72,8 +65,6 @@ const PortfolioDetailScreen = ({ route, navigation }) => {
               </View>
             </View>
           )}
-
-          {/* Features - This would come from your data */}
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Key Features</Text>
             <View style={styles.featuresList}>
@@ -119,8 +110,6 @@ const PortfolioDetailScreen = ({ route, navigation }) => {
               )}
             </View>
           </View>
-
-          {/* Links Section */}
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>View Project</Text>
             <View style={styles.linksContainer}>
@@ -169,8 +158,6 @@ const PortfolioDetailScreen = ({ route, navigation }) => {
               )}
             </View>
           </View>
-
-          {/* Year and Client Info - This would come from your data */}
         </View>
       </ScrollView>
     </SafeAreaView>
